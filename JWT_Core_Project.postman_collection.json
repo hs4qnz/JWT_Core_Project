@@ -1,0 +1,146 @@
+{
+	"info": {
+		"_postman_id": "48d458e5-2e1d-4845-8528-1b6f55734ded",
+		"name": "JWT_Core_Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12801708"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5057/api/Login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5057",
+					"path": [
+						"api",
+						"Login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTMyODU4OTQsImlzcyI6ImxvY2FsaG9zdCIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0In0.e3Yyh3syIkPcLpDZSQbMZJXeqb_JAKPWdNTyReY-9JY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5057/api/User",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5057",
+					"path": [
+						"api",
+						"User"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get someUsers",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTMyODU4OTQsImlzcyI6ImxvY2FsaG9zdCIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0In0.e3Yyh3syIkPcLpDZSQbMZJXeqb_JAKPWdNTyReY-9JY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5057/api/User/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5057",
+					"path": [
+						"api",
+						"User",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTMyODU4OTQsImlzcyI6ImxvY2FsaG9zdCIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0In0.e3Yyh3syIkPcLpDZSQbMZJXeqb_JAKPWdNTyReY-9JY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"first_name\": \"Agent12\",\r\n    \"last_name\": \"Agent12\",\r\n    \"username\": \"agent12\",\r\n    \"password\": \"agent12\",\r\n    \"create_at\": \"2024-02-14T14:42:47.583\",\r\n    \"create_by\": 1,\r\n    \"updated_at\": null,\r\n    \"updated_by\": null,\r\n    \"isActive\": true,\r\n    \"role_id\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5057/api/User/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5057",
+					"path": [
+						"api",
+						"User",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
