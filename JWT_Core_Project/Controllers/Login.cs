@@ -47,15 +47,22 @@ namespace JWT_Core_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromForm] string username, [FromForm] string password)
         {
-            var user = await _dbContext.users.FirstOrDefaultAsync(u => u.username == username && u.password == password && u.isActive == true);
+            // var user = await _dbContext.users.FirstOrDefaultAsync(u => u.username == username && u.password == password && u.isActive == true);
+            var user = await _dbContext.users.FirstOrDefaultAsync(u => u.username == username /* && u.password == password */ && u.isActive == true);
 
             if (user != null)
             {
+               // Verify the password
+                var passwordHasher = new PasswordHasher<Users>();
+                var result = passwordHasher.VerifyHashedPassword(user, user.password, password);
 
-                var token = GenerateToken(user);
-  
-                Response.StatusCode = 200;
-                return Ok(new { token = token });
+                if (result == PasswordVerificationResult.Success)
+                {
+                    var token = GenerateToken(user);
+                
+                    Response.StatusCode = 200;
+                    return Ok(new { token = token });
+                }
             }
 
             // If authentication fails, return appropriate response
