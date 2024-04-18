@@ -1,4 +1,4 @@
-﻿using JWT_Core_Project.Models;
+using JWT_Core_Project.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -100,6 +100,11 @@ namespace JWT_Core_Project.Controllers
                     return Conflict("Username already exists");
                 }
 
+                // Hash the user's password
+                var passwordHasher = new PasswordHasher<Users>();
+                user.password = passwordHasher.HashPassword(user, user.password);
+
+
                 _dbContext.users.Add(user);
                 await _dbContext.SaveChangesAsync();
 
@@ -172,6 +177,7 @@ namespace JWT_Core_Project.Controllers
                 user.first_name = userUpdate.first_name;
                 user.last_name = userUpdate.last_name;
                 user.username = userUpdate.username;
+                // user.updated_at = userUpdate.updated_at; 
 
                 if (userUpdate.updated_by == null)
                 {
@@ -182,12 +188,18 @@ namespace JWT_Core_Project.Controllers
                     user.updated_at = DateTime.Now; //TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.Local);
                 }
 
+                // user.updated_at = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.Local);
                 user.updated_by = userUpdate.updated_by;
                 user.isActive = userUpdate.isActive;
                 user.role_id = userUpdate.role_id;
 
                 if (userUpdate.password != null)
                 {
+                    // Hash the user's new password
+                    var passwordHasher = new PasswordHasher<Users>();
+                    userUpdate.password = passwordHasher.HashPassword(userUpdate, userUpdate.password);
+
+                    // Update the user's password in the database
                     user.password = userUpdate.password;
                 }
 
